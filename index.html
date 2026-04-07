@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiago Barbosa — Especialista em IA Aplicada</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700;800&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#07070a;
+  --surface:#0e0e14;
+  --surface2:#14141e;
+  --border:#1a1a2e;
+  --accent:#6c5ce7;
+  --accent2:#00cec9;
+  --accent3:#fd79a8;
+  --text:#e8e8f0;
+  --text-dim:#8888a8;
+  --text-muted:#555570;
+  --glow:rgba(108,92,231,.15);
+  --glow2:rgba(0,206,201,.12);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;overflow-x:hidden;line-height:1.6}
+
+/* GRAIN OVERLAY */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1rem 2rem;
+  background:rgba(7,7,10,.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.1rem;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  color:var(--text-dim);text-decoration:none;font-size:.85rem;font-weight:400;
+  letter-spacing:.05em;text-transform:uppercase;transition:color .3s;
+  font-family:'Sora',sans-serif;
+}
+.nav-links a:hover{color:var(--accent2)}
+.nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:8rem 2rem 4rem;max-width:1200px;margin:0 auto;position:relative;
+  gap:4rem;
+}
+.hero-content{flex:1}
+.hero-image{
+  flex-shrink:0;position:relative;
+}
+.hero-image img{
+  width:320px;height:320px;object-fit:cover;object-position:top center;
+  border-radius:20px;
+  border:2px solid var(--border);
+  filter:grayscale(20%);
+  transition:all .5s;
+}
+.hero-image img:hover{filter:grayscale(0%);border-color:var(--accent)}
+.hero-image::before{
+  content:'';position:absolute;inset:-3px;border-radius:22px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  z-index:-1;opacity:.4;filter:blur(15px);
+}
+.hero::after{
+  content:'';position:absolute;top:20%;right:-10%;width:500px;height:500px;
+  background:radial-gradient(circle,var(--glow) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-tag{
+  font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent2);
+  letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.hero-tag::before{content:'';width:30px;height:1px;background:var(--accent2)}
+.hero h1{
+  font-family:'Outfit',sans-serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:800;
+  line-height:1.05;margin-bottom:1.5rem;
+}
+.hero h1 .gradient{
+  background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-desc{
+  font-size:1.15rem;color:var(--text-dim);max-width:600px;line-height:1.8;
+  font-weight:300;margin-bottom:2.5rem;
+}
+.hero-stats{display:flex;gap:3rem;flex-wrap:wrap}
+.stat{display:flex;flex-direction:column}
+.stat-num{
+  font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:700;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.stat-label{font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-top:.25rem}
+
+/* SECTION */
+section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
+.section-header{margin-bottom:3rem}
+.section-tag{
+  font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent);
+  letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.section-tag::before{content:'';width:20px;height:1px;background:var(--accent)}
+.section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;line-height:1.15}
+
+/* SKILLS */
+.skills-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;
+}
+.skill-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  padding:2rem;position:relative;overflow:hidden;transition:all .4s;
+}
+.skill-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 20px 60px var(--glow)}
+.skill-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  opacity:0;transition:opacity .4s;
+}
+.skill-card:hover::before{opacity:1}
+.skill-icon{font-size:2rem;margin-bottom:1rem;display:block}
+.skill-icon i,.project-icon i,.contact-link-icon i{color:var(--accent2)}
+.skill-icon i{width:32px;height:32px}
+.project-icon i{width:28px;height:28px}
+.skill-name{font-weight:700;font-size:1.1rem;margin-bottom:.5rem}
+.skill-desc{color:var(--text-dim);font-size:.9rem;line-height:1.6;font-weight:300}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+.skill-tags span{
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;
+  padding:.25rem .6rem;border-radius:4px;
+  background:rgba(108,92,231,.1);color:var(--accent);border:1px solid rgba(108,92,231,.2);
+}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:1.5rem}
+.project-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:2rem;position:relative;overflow:hidden;transition:all .4s;
+  display:flex;flex-direction:column;
+}
+.project-card:hover{border-color:var(--accent2);transform:translateY(-4px);box-shadow:0 20px 60px var(--glow2)}
+.project-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem}
+.project-badge{
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;
+  padding:.3rem .7rem;border-radius:20px;text-transform:uppercase;letter-spacing:.1em;
+}
+.badge-ai{background:rgba(108,92,231,.15);color:var(--accent);border:1px solid rgba(108,92,231,.3)}
+.badge-saas{background:rgba(0,206,201,.12);color:var(--accent2);border:1px solid rgba(0,206,201,.25)}
+.badge-auto{background:rgba(253,121,168,.12);color:var(--accent3);border:1px solid rgba(253,121,168,.25)}
+.badge-infra{background:rgba(136,136,168,.1);color:var(--text-dim);border:1px solid rgba(136,136,168,.2)}
+.project-icon{font-size:1.8rem}
+.project-name{font-weight:700;font-size:1.2rem;margin-bottom:.5rem}
+.project-desc{color:var(--text-dim);font-size:.88rem;line-height:1.7;font-weight:300;flex:1}
+.project-stack{
+  display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.25rem;padding-top:1.25rem;
+  border-top:1px solid var(--border);
+}
+.project-stack span{
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;
+  padding:.2rem .5rem;border-radius:3px;
+  background:var(--surface2);color:var(--text-muted);
+}
+
+/* EXPERIENCE TIMELINE */
+.timeline{position:relative;padding-left:2.5rem}
+.timeline::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:1px;
+  background:linear-gradient(180deg,var(--accent),var(--accent2),transparent);
+}
+.timeline-item{position:relative;margin-bottom:3rem}
+.timeline-item::before{
+  content:'';position:absolute;left:-2.65rem;top:.5rem;width:10px;height:10px;
+  border-radius:50%;background:var(--accent);box-shadow:0 0 20px var(--glow);
+}
+.timeline-period{
+  font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent2);
+  letter-spacing:.1em;margin-bottom:.5rem;
+}
+.timeline-role{font-weight:700;font-size:1.2rem;margin-bottom:.25rem}
+.timeline-company{color:var(--text-dim);font-size:.95rem;margin-bottom:.75rem}
+.timeline-desc{color:var(--text-dim);font-size:.88rem;line-height:1.7;font-weight:300}
+
+/* CONTACT */
+.contact-section{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  padding:3rem;margin:5rem auto;max-width:1200px;position:relative;overflow:hidden;
+}
+.contact-section::before{
+  content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;
+  background:radial-gradient(circle,var(--glow) 0%,transparent 70%);pointer-events:none;
+}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;position:relative;z-index:1}
+.contact-info h3{font-size:1.8rem;margin-bottom:1rem}
+.contact-info p{color:var(--text-dim);font-weight:300;line-height:1.8}
+.contact-links{display:flex;flex-direction:column;gap:1rem;justify-content:center}
+.contact-link{
+  display:flex;align-items:center;gap:1rem;padding:1rem 1.5rem;
+  background:var(--surface2);border:1px solid var(--border);border-radius:10px;
+  text-decoration:none;color:var(--text);transition:all .3s;
+}
+.contact-link:hover{border-color:var(--accent);transform:translateX(8px)}
+.contact-link-icon{font-size:1.2rem;width:2rem;text-align:center}
+.contact-link-label{font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em}
+.contact-link-value{font-size:.95rem;font-weight:600}
+
+/* FOOTER */
+footer{
+  text-align:center;padding:2rem;
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-muted);
+  border-top:1px solid var(--border);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.animate{opacity:0;animation:fadeUp .8s ease forwards}
+.delay-1{animation-delay:.1s}
+.delay-2{animation-delay:.2s}
+.delay-3{animation-delay:.3s}
+.delay-4{animation-delay:.4s}
+.delay-5{animation-delay:.5s}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:.75rem 1rem}
+  .nav-links{
+    display:none;flex-direction:column;position:absolute;
+    top:100%;left:0;right:0;background:rgba(7,7,10,.95);
+    backdrop-filter:blur(20px);padding:1.5rem;gap:1.25rem;
+    border-bottom:1px solid var(--border);
+  }
+  .nav-links.active{display:flex}
+  .nav-toggle{display:block}
+  .hero{padding:7rem 1.25rem 3rem;min-height:auto;flex-direction:column-reverse;gap:2rem}
+  .hero-image img{width:220px;height:220px}
+  .hero-stats{gap:2rem}
+  section{padding:3rem 1.25rem}
+  .projects-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .contact-section{margin:3rem 1rem;padding:2rem 1.5rem}
+  .stat-num{font-size:1.5rem}
+}
+@media(max-width:480px){
+  .hero h1{font-size:2rem}
+  .hero-desc{font-size:1rem}
+  .project-card{padding:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">&lt;thiago.dev /&gt;</div>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰</button>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projetos</a></li>
+    <li><a href="#experience">Experiência</a></li>
+    <li><a href="#contact">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-content">
+    <span class="hero-tag animate">Especialista em IA Aplicada</span>
+    <h1 class="animate delay-1">
+      Desenvolvedor Fullstack &<br>
+      <span class="gradient">Especialista em IA Aplicada.</span>
+    </h1>
+    <p class="hero-desc animate delay-2">
+      +22 anos em TI. Fullstack developer com foco em integrações, automação de fluxos 
+      e agentes de IA em produção. Construo SaaS do zero — do backend ao deploy.
+    </p>
+    <div class="hero-stats animate delay-3">
+      <div class="stat">
+        <span class="stat-num">13+</span>
+        <span class="stat-label">Projetos em produção</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">22+</span>
+        <span class="stat-label">Anos em TI</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">80+</span>
+        <span class="stat-label">Nodes n8n (maior workflow)</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-image animate delay-2">
+    <img src="thiago-profile.jpg" alt="Thiago Barbosa Silva">
+  </div>
+</header>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <div class="section-tag">Competências</div>
+    <h2 class="section-title">Stack técnica</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <span class="skill-icon"><i data-lucide="brain-circuit"></i></span>
+      <div class="skill-name">IA & Agentes Autônomos</div>
+      <div class="skill-desc">Agentes de IA em produção com Claude API, fluxos multimodais (texto, imagem, voz), diagnósticos automatizados e monitoramento por visão computacional.</div>
+      <div class="skill-tags"><span>Claude API</span><span>Agentes</span><span>Multimodal</span><span>NLP</span></div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon"><i data-lucide="workflow"></i></span>
+      <div class="skill-name">Integrações & iPaaS</div>
+      <div class="skill-desc">n8n como plataforma central de automação. Workflows complexos com 80+ nodes, lógica condicional, tratamento de erros e monitoramento em tempo real.</div>
+      <div class="skill-tags"><span>n8n</span><span>REST</span><span>SOAP</span><span>Webhooks</span><span>OAuth2</span></div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon"><i data-lucide="server"></i></span>
+      <div class="skill-name">Backend & APIs</div>
+      <div class="skill-desc">Node.js/TypeScript com Express, autenticação JWT, API Keys para B2B, PostgreSQL com Row-Level Security. Python para scripts e automação.</div>
+      <div class="skill-tags"><span>Node.js</span><span>TypeScript</span><span>Express</span><span>Python</span><span>JWT</span></div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon"><i data-lucide="layout-dashboard"></i></span>
+      <div class="skill-name">Frontend</div>
+      <div class="skill-desc">React com Vite, interfaces responsivas, dashboards interativos e portais do cliente com dados em tempo real.</div>
+      <div class="skill-tags"><span>React</span><span>Vite</span><span>HTML/CSS</span><span>Responsivo</span></div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon"><i data-lucide="database"></i></span>
+      <div class="skill-name">Banco de Dados</div>
+      <div class="skill-desc">PostgreSQL com RLS para multi-tenancy seguro, SQL avançado, modelagem relacional e consultas otimizadas para produção.</div>
+      <div class="skill-tags"><span>PostgreSQL</span><span>RLS</span><span>SQL</span><span>Modelagem</span></div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon"><i data-lucide="cloud-cog"></i></span>
+      <div class="skill-name">Infraestrutura & DevOps</div>
+      <div class="skill-desc">Docker Swarm, Traefik como proxy reverso, VPS Linux, Easypanel, PM2. Ambientes staging isolados com variáveis e instâncias separadas.</div>
+      <div class="skill-tags"><span>Docker</span><span>Swarm</span><span>Traefik</span><span>Linux</span><span>PM2</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <div class="section-tag">Portfólio</div>
+    <h2 class="section-title">Projetos em produção</h2>
+  </div>
+  <div class="projects-grid">
+
+    <!-- BIRA -->
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-icon"><i data-lucide="bot"></i></span>
+        <span class="project-badge badge-ai">IA + SaaS</span>
+      </div>
+      <div class="project-name">Bira — Assistente Financeiro IA</div>
+      <div class="project-desc">
+        SaaS financeiro completo com agente de IA integrado ao WhatsApp. 
+        Dashboard CFO, transações por voz/texto/foto, geração de orçamentos em PDF, 
+        cobranças automatizadas via Asaas e relatórios mensais por e-mail.
+        Onboarding automatizado: criação de conta → cliente Asaas → boleto via WhatsApp.
+      </div>
+      <div class="project-stack">
+        <span>Node.js</span><span>TypeScript</span><span>React/Vite</span><span>Claude API</span>
+        <span>Evolution API</span><span>Asaas</span><span>n8n</span><span>PostgreSQL</span><span>Resend</span>
+      </div>
+    </div>
+
+    <!-- FLEETOS -->
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-icon"><i data-lucide="map-pin"></i></span>
+        <span class="project-badge badge-saas">SaaS</span>
+      </div>
+      <div class="project-name">FleetOS — Rastreamento Veicular</div>
+      <div class="project-desc">
+        Plataforma GPS SaaS multi-tenant em produção. Integração com Asaas para cobranças 
+        recorrentes e PIX com deduplicação por CPF/CNPJ. Portal do cliente com mapa em 
+        tempo real via Traccar. Webhooks processados via n8n.
+      </div>
+      <div class="project-stack">
+        <span>Node.js</span><span>React/Vite</span><span>PostgreSQL RLS</span><span>Traccar</span>
+        <span>Asaas</span><span>n8n</span><span>Docker Swarm</span><span>Traefik</span>
+      </div>
+    </div>
+
+    <!-- INTELBRAS -->
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-icon"><i data-lucide="camera"></i></span>
+        <span class="project-badge badge-ai">IA + Visão</span>
+      </div>
+      <div class="project-name">Intelbras Watcher</div>
+      <div class="project-desc">
+        Monitoramento inteligente de câmeras Intelbras com Claude Vision. 
+        Análise de imagens em tempo real para detecção de eventos, 
+        com arquitetura otimizada para custo mínimo em produção.
+      </div>
+      <div class="project-stack">
+        <span>TypeScript</span><span>Claude Vision</span><span>Intelbras API</span><span>Node.js</span>
+      </div>
+    </div>
+
+    <!-- OPENCLAW -->
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-icon"><i data-lucide="shield-check"></i></span>
+        <span class="project-badge badge-ai">Agente IA</span>
+      </div>
+      <div class="project-name">OpenClaw — Agente Autônomo</div>
+      <div class="project-desc">
+        Agente de monitoramento autônomo para infraestrutura VPS. 
+        Integrado ao Telegram para alertas em tempo real, diagnóstico 
+        de serviços e execução remota de comandos.
+      </div>
+      <div class="project-stack">
+        <span>Shell</span><span>Node.js</span><span>Telegram Bot</span><span>Docker</span>
+      </div>
+    </div>
+
+    <!-- DIAGNOSTICO IA -->
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-icon"><i data-lucide="scan-search"></i></span>
+        <span class="project-badge badge-ai">IA</span>
+      </div>
+      <div class="project-name">Diagnóstico IA VCATech</div>
+      <div class="project-desc">
+        Sistema de diagnósticos automatizados por segmento de negócio. 
+        Análise inteligente de dados para geração de relatórios e 
+        recomendações personalizadas via IA.
+      </div>
+      <div class="project-stack">
+        <span>HTML/CSS</span><span>JavaScript</span><span>Claude API</span><span>n8n</span>
+      </div>
+    </div>
+
+    <!-- FULLTRACK ASAAS -->
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-icon"><i data-lucide="refresh-cw"></i></span>
+        <span class="project-badge badge-auto">Automação</span>
+      </div>
+      <div class="project-name">FullTrack → Asaas Integration</div>
+      <div class="project-desc">
+        Automação completa de cadastro de clientes FullTrack para o gateway Asaas 
+        com notificação via WhatsApp. Pipeline de dados automatizado com 
+        deduplicação e validação.
+      </div>
+      <div class="project-stack">
+        <span>n8n</span><span>Asaas API</span><span>Evolution API</span><span>Webhooks</span>
+      </div>
+    </div>
+
+    <!-- VCA LEADS -->
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-icon"><i data-lucide="target"></i></span>
+        <span class="project-badge badge-auto">Automação</span>
+      </div>
+      <div class="project-name">VCA Leads</div>
+      <div class="project-desc">
+        Sistema de captação e prospecção automatizada de leads via WhatsApp. 
+        Fluxos inteligentes de qualificação e follow-up com integração 
+        a CRM e agendamento automático.
+      </div>
+      <div class="project-stack">
+        <span>JavaScript</span><span>n8n</span><span>Evolution API</span><span>WhatsApp</span>
+      </div>
+    </div>
+
+    <!-- V-SYNC ODONTO -->
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-icon"><i data-lucide="heart-pulse"></i></span>
+        <span class="project-badge badge-saas">SaaS</span>
+      </div>
+      <div class="project-name">V-Sync Odonto</div>
+      <div class="project-desc">
+        Sistema completo para clínicas odontológicas. Gestão de pacientes, 
+        agendamento, prontuário digital e controle financeiro integrado.
+      </div>
+      <div class="project-stack">
+        <span>TypeScript</span><span>React/Vite</span><span>Node.js</span><span>PostgreSQL</span>
+      </div>
+    </div>
+
+    <!-- PARKFLOW -->
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-icon"><i data-lucide="car"></i></span>
+        <span class="project-badge badge-saas">SaaS</span>
+      </div>
+      <div class="project-name">ParkFlow</div>
+      <div class="project-desc">
+        Sistema de gestão de estacionamento com controle de vagas, 
+        entrada/saída automatizada, relatórios de ocupação e 
+        integração com pagamentos.
+      </div>
+      <div class="project-stack">
+        <span>TypeScript</span><span>React/Vite</span><span>Node.js</span><span>PostgreSQL</span>
+      </div>
+    </div>
+
+    <!-- PETLOVE -->
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-icon"><i data-lucide="paw-print"></i></span>
+        <span class="project-badge badge-saas">SaaS</span>
+      </div>
+      <div class="project-name">PetLove</div>
+      <div class="project-desc">
+        Plataforma para pet shops e clínicas veterinárias. Gestão de 
+        clientes e pets, agendamento de consultas, controle de estoque 
+        e histórico veterinário.
+      </div>
+      <div class="project-stack">
+        <span>TypeScript</span><span>React/Vite</span><span>Node.js</span><span>PostgreSQL</span>
+      </div>
+    </div>
+
+    <!-- LIGABRUTO -->
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-icon"><i data-lucide="trophy"></i></span>
+        <span class="project-badge badge-saas">Plataforma</span>
+      </div>
+      <div class="project-name">LigaBruto BR</div>
+      <div class="project-desc">
+        Plataforma de ligas esportivas com gestão de times, tabelas, 
+        resultados e classificações. Sistema completo para organização 
+        de campeonatos.
+      </div>
+      <div class="project-stack">
+        <span>TypeScript</span><span>React/Vite</span><span>Node.js</span><span>PostgreSQL</span>
+      </div>
+    </div>
+
+    <!-- AGENDAFLEX -->
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-icon"><i data-lucide="calendar-check"></i></span>
+        <span class="project-badge badge-saas">SaaS</span>
+      </div>
+      <div class="project-name">AgendaFlex</div>
+      <div class="project-desc">
+        Sistema de agendamento flexível multi-negócio. Reservas online, 
+        notificações automáticas via WhatsApp, painel administrativo 
+        e integração com calendário.
+      </div>
+      <div class="project-stack">
+        <span>TypeScript</span><span>React/Vite</span><span>Node.js</span><span>PostgreSQL</span>
+      </div>
+    </div>
+
+    <!-- ESPETARIA -->
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-icon"><i data-lucide="utensils-crossed"></i></span>
+        <span class="project-badge badge-saas">Sistema</span>
+      </div>
+      <div class="project-name">Espetaria</div>
+      <div class="project-desc">
+        Sistema para gestão de espetarias e food service. Controle de 
+        pedidos, cardápio digital, gestão de mesas e integração com 
+        cozinha e caixa.
+      </div>
+      <div class="project-stack">
+        <span>JavaScript</span><span>Node.js</span><span>PostgreSQL</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <div class="section-tag">Trajetória</div>
+    <h2 class="section-title">Experiência profissional</h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-period">2024 — ATUAL</div>
+      <div class="timeline-role">Desenvolvedor Fullstack & Especialista em Integrações</div>
+      <div class="timeline-company">VCA-TECH — Projetos Próprios e Clientes · Remoto</div>
+      <div class="timeline-desc">
+        Arquitetura e desenvolvimento de SaaS com foco em integrações entre APIs externas 
+        (pagamentos, WhatsApp, IA). n8n como iPaaS central com workflows de 80+ nodes. 
+        Infraestrutura como código com Docker Swarm e Traefik. Autenticação JWT e PostgreSQL com RLS.
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-period">2020 — 2024</div>
+      <div class="timeline-role">Coordenador de TI & Desenvolvedor de Sistemas</div>
+      <div class="timeline-company">TSJ Transportes de Cargas · Vitória da Conquista – BA</div>
+      <div class="timeline-desc">
+        Liderança do ciclo completo de desenvolvimento de sistemas internos. 
+        Implementação e customização de TOTVS Protheus (ADVPL), integrações com 
+        Web Services SOAP/REST e análise de dados via SQL para relatórios gerenciais.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="section-tag">Contato</div>
+      <h3>Vamos conversar?</h3>
+      <p>Disponível para projetos de integração, automação e soluções com IA aplicada. Regime PJ/Cooperado, 100% remoto.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:suportevca@gmail.com" class="contact-link">
+        <span class="contact-link-icon"><i data-lucide="mail"></i></span>
+        <div>
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-value">suportevca@gmail.com</div>
+        </div>
+      </a>
+      <a href="tel:+5577988134136" class="contact-link">
+        <span class="contact-link-icon"><i data-lucide="phone"></i></span>
+        <div>
+          <div class="contact-link-label">Telefone</div>
+          <div class="contact-link-value">(77) 98813-4136</div>
+        </div>
+      </a>
+      <a href="https://github.com/Thingridy" target="_blank" class="contact-link">
+        <span class="contact-link-icon"><i data-lucide="github"></i></span>
+        <div>
+          <div class="contact-link-label">GitHub</div>
+          <div class="contact-link-value">github.com/Thingridy</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 Thiago Barbosa Silva — Todos os direitos reservados
+</footer>
+
+<script>
+// Initialize Lucide icons
+lucide.createIcons();
+
+// Intersection Observer for scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.skill-card, .project-card, .timeline-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+
+// Close mobile menu on link click
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('active');
+  });
+});
+</script>
+
+</body>
+</html>
