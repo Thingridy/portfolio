@@ -104,6 +104,20 @@ nav{
   0%,100%{opacity:.2;transform:scale(1)}
   50%{opacity:.45;transform:scale(1.03)}
 }
+.hero-name{
+  text-align:center;margin-top:1.2rem;position:relative;z-index:3;
+  font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent),var(--accent2));
+  background-size:200% 100%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 3s linear infinite;
+  text-shadow:0 0 30px rgba(0,206,201,.3);
+}
+@keyframes shimmer{
+  0%{background-position:0% 50%}
+  100%{background-position:200% 50%}
+}
 .hero::after{
   content:'';position:absolute;top:20%;right:-10%;width:500px;height:500px;
   background:radial-gradient(circle,var(--glow) 0%,transparent 70%);
@@ -319,7 +333,7 @@ footer{
     </p>
     <div class="hero-stats animate delay-3">
       <div class="stat">
-        <span class="stat-num">100+</span>
+        <span class="stat-num">70+</span>
         <span class="stat-label">Projetos entregues</span>
       </div>
       <div class="stat">
@@ -327,13 +341,14 @@ footer{
         <span class="stat-label">Anos em TI</span>
       </div>
       <div class="stat">
-        <span class="stat-num">300+</span>
+        <span class="stat-num">500+</span>
         <span class="stat-label">Nodes n8n (maior workflow)</span>
       </div>
     </div>
   </div>
   <div class="hero-image animate delay-2">
     <img src="thiago-profile.jpg" alt="Thiago Barbosa Silva">
+    <div class="hero-name">Thiago Barbosa</div>
   </div>
 </header>
 
