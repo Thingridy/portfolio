@@ -67,8 +67,11 @@ nav{
   gap:4rem;
 }
 .hero-content{flex:1}
+.hero-image-wrapper{
+  flex-shrink:0;display:flex;flex-direction:column;align-items:center;
+}
 .hero-image{
-  flex-shrink:0;position:relative;
+  position:relative;
 }
 .hero-image img{
   width:320px;height:320px;object-fit:cover;object-position:top center;
@@ -346,8 +349,10 @@ footer{
       </div>
     </div>
   </div>
-  <div class="hero-image animate delay-2">
-    <img src="thiago-profile.jpg" alt="Thiago Barbosa Silva">
+  <div class="hero-image-wrapper animate delay-2">
+    <div class="hero-image">
+      <img src="thiago-profile.jpg" alt="Thiago Barbosa Silva">
+    </div>
     <div class="hero-name">Thiago Barbosa</div>
   </div>
 </header>
