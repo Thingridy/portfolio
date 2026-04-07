@@ -73,15 +73,36 @@ nav{
 .hero-image img{
   width:320px;height:320px;object-fit:cover;object-position:top center;
   border-radius:20px;
-  border:2px solid var(--border);
+  border:2px solid var(--accent2);
   filter:grayscale(20%);
   transition:all .5s;
+  position:relative;z-index:2;
 }
-.hero-image img:hover{filter:grayscale(0%);border-color:var(--accent)}
+.hero-image img:hover{filter:grayscale(0%);border-color:#fff}
+.hero-image::before,.hero-image::after{
+  content:'';position:absolute;border-radius:22px;z-index:1;
+}
 .hero-image::before{
-  content:'';position:absolute;inset:-3px;border-radius:22px;
+  inset:-4px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3),var(--accent));
+  background-size:300% 300%;
+  animation:borderRotate 4s ease infinite;
+  opacity:.8;
+}
+.hero-image::after{
+  inset:-12px;
   background:linear-gradient(135deg,var(--accent),var(--accent2));
-  z-index:-1;opacity:.4;filter:blur(15px);
+  opacity:.3;filter:blur(20px);
+  animation:pulse 2.5s ease-in-out infinite;
+}
+@keyframes borderRotate{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes pulse{
+  0%,100%{opacity:.2;transform:scale(1)}
+  50%{opacity:.45;transform:scale(1.03)}
 }
 .hero::after{
   content:'';position:absolute;top:20%;right:-10%;width:500px;height:500px;
