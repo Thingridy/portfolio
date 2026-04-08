@@ -76,21 +76,31 @@ nav{
 .hero-image img{
   width:320px;height:320px;object-fit:cover;object-position:top center;
   border-radius:16px;
-  border:1px solid var(--border);
+  border:2px solid rgba(0,206,201,.3);
   transition:all .5s;
   position:relative;z-index:2;
 }
 .hero-image img:hover{border-color:var(--accent2)}
+/* Laser border effect */
 .hero-image::before{
-  content:'';position:absolute;inset:-1px;border-radius:17px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  z-index:1;opacity:0;transition:opacity .4s;
+  content:'';position:absolute;inset:-3px;border-radius:18px;z-index:1;
+  background:conic-gradient(from var(--laser-angle,0deg),transparent 0%,transparent 70%,var(--accent2) 80%,#fff 85%,var(--accent2) 90%,transparent 100%);
+  animation:laserSpin 3s linear infinite;
 }
-.hero-image:hover::before{opacity:.6}
 .hero-image::after{
-  content:'';position:absolute;inset:-8px;border-radius:20px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  opacity:.1;filter:blur(16px);z-index:0;
+  content:'';position:absolute;inset:-8px;border-radius:22px;z-index:0;
+  background:conic-gradient(from var(--laser-angle,0deg),transparent 0%,transparent 70%,var(--accent2) 85%,transparent 100%);
+  opacity:.4;filter:blur(12px);
+  animation:laserSpin 3s linear infinite;
+}
+@keyframes laserSpin{
+  0%{--laser-angle:0deg}
+  100%{--laser-angle:360deg}
+}
+@property --laser-angle{
+  syntax:'<angle>';
+  initial-value:0deg;
+  inherits:false;
 }
 .hero-name{
   font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;
@@ -284,20 +294,30 @@ footer{
   }
   .nav-links.active{display:flex}
   .nav-toggle{display:block}
-  .hero{padding:7rem 1.25rem 3rem;min-height:auto;flex-direction:column-reverse;gap:2rem}
-  .hero-image img{width:220px;height:220px}
-  .hero-stats{gap:2rem}
+  .hero{padding:7rem 1.25rem 3rem;min-height:auto;flex-direction:column-reverse;gap:2rem;text-align:center}
+  .hero-tag{justify-content:center}
+  .hero-image img{width:200px;height:200px}
+  .hero-image-wrapper{align-items:center}
+  .hero-stats{gap:1.5rem;justify-content:center}
+  .hero-desc{margin-left:auto;margin-right:auto}
   section{padding:3rem 1.25rem}
   .projects-grid{grid-template-columns:1fr}
   .skills-grid{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr}
   .contact-section{margin:3rem 1rem;padding:2rem 1.5rem}
   .stat-num{font-size:1.5rem}
+  .timeline{padding-left:2rem}
 }
 @media(max-width:480px){
-  .hero h1{font-size:2rem}
-  .hero-desc{font-size:1rem}
-  .project-card{} .project-body{padding:1.25rem 1.5rem 1.5rem}
+  .hero h1{font-size:1.8rem}
+  .hero-desc{font-size:.95rem}
+  .hero-image img{width:170px;height:170px}
+  .hero-stats{flex-direction:column;gap:1rem;align-items:center}
+  .project-body{padding:1.25rem 1.25rem 1.5rem}
+  .skill-card{padding:1.5rem}
+  .section-title{font-size:1.5rem}
+  .hero-name{font-size:.9rem}
+  .contact-link{padding:.75rem 1rem}
 }
 </style>
 </head>
@@ -678,12 +698,15 @@ footer{
   <div class="timeline">
     <div class="timeline-item">
       <div class="timeline-period">2024 — ATUAL</div>
-      <div class="timeline-role">Desenvolvedor Fullstack & Especialista em Integrações</div>
+      <div class="timeline-role">Especialista em Integrações, IA & Desenvolvedor Fullstack</div>
       <div class="timeline-company">VCA-TECH — Projetos Próprios e Clientes · Remoto</div>
       <div class="timeline-desc">
-        Arquitetura e desenvolvimento de SaaS com foco em integrações entre APIs externas 
-        (pagamentos, WhatsApp, IA). n8n como iPaaS central com workflows de 80+ nodes. 
-        Infraestrutura como código com Docker Swarm e Traefik. Autenticação JWT e PostgreSQL com RLS.
+        Hoje utilizo mais de 22 anos de experiência para criar soluções de ponta com n8n, 
+        Node.js e IA generativa. Desenvolvo plataformas SaaS em produção como o FleetOS 
+        (rastreamento veicular) e o Bira (assistente financeiro com IA), unindo toda a base 
+        sólida de hardware e redes do passado com o futuro da automação inteligente. 
+        Arquitetura completa: Docker Swarm, Traefik, PostgreSQL RLS, JWT, Claude API e 
+        workflows n8n com 500+ nodes.
       </div>
     </div>
     <div class="timeline-item">
@@ -691,9 +714,43 @@ footer{
       <div class="timeline-role">Coordenador de TI & Desenvolvedor de Sistemas</div>
       <div class="timeline-company">TSJ Transportes de Cargas · Vitória da Conquista – BA</div>
       <div class="timeline-desc">
-        Liderança do ciclo completo de desenvolvimento de sistemas internos. 
-        Implementação e customização de TOTVS Protheus (ADVPL), integrações com 
-        Web Services SOAP/REST e análise de dados via SQL para relatórios gerenciais.
+        Divisor de águas na carreira. Liderança do ciclo completo de desenvolvimento de 
+        sistemas internos e integração do ERP TOTVS Protheus com APIs externas e Web Services 
+        SOAP/REST. Análise de dados via SQL para relatórios gerenciais e operacionais. 
+        Em paralelo, graduação em Análise e Desenvolvimento de Sistemas pela UniCesumar (2020–2022) 
+        e especialização no ecossistema Protheus (ADVPL).
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-period">2013 — 2019</div>
+      <div class="timeline-role">Especialista em Infraestrutura & Controle de Acesso</div>
+      <div class="timeline-company">Fácil Impressões / Rede Bahia · Eventos nacionais</div>
+      <div class="timeline-desc">
+        Montagem de redes e sistemas de controle de acesso em estádios de futebol, feiras 
+        culturais e exposições por todo o Brasil. Soluções rápidas para problemas complexos 
+        de hardware e software em tempo real, com infraestrutura para milhares de usuários 
+        simultâneos. Instalação elétrica e manutenção de equipamentos eletrônicos em campo.
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-period">2000 — 2012</div>
+      <div class="timeline-role">Suporte Técnico, Automação Comercial & Segurança</div>
+      <div class="timeline-company">Adeskollor · Vitória da Conquista – BA</div>
+      <div class="timeline-desc">
+        13 anos fundindo suporte técnico com automação comercial. Manutenção de impressoras 
+        térmicas, leitores de código de barras, implementação de sistemas CFTV e controle de 
+        acesso com barreiras eletrônicas e relógios de ponto. Conhecimento profundo de 
+        hardware, redes e infraestrutura que formou a base de tudo que veio depois.
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-period">1998 — 2000</div>
+      <div class="timeline-role">Início na Tecnologia — Hardware & Redes</div>
+      <div class="timeline-company">Autônomo · Vitória da Conquista – BA</div>
+      <div class="timeline-desc">
+        Onde tudo começou. Formatação de computadores, manutenção física de microcomputadores 
+        e redes na era do Windows 95/98. Cada driver era uma vitória e a estabilidade do 
+        sistema dependia de conhecimento profundo do hardware.
       </div>
     </div>
   </div>
