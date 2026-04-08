@@ -179,10 +179,24 @@ section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:1.5rem}
 .project-card{
   background:var(--surface);border:1px solid var(--border);border-radius:16px;
-  padding:2rem;position:relative;overflow:hidden;transition:all .4s;
+  overflow:hidden;transition:all .4s;
   display:flex;flex-direction:column;
 }
 .project-card:hover{border-color:var(--accent2);transform:translateY(-4px);box-shadow:0 20px 60px var(--glow2)}
+.project-preview{
+  width:100%;height:220px;overflow:hidden;position:relative;
+  background:var(--surface2);
+}
+.project-preview img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+  transition:transform .5s;
+}
+.project-card:hover .project-preview img{transform:scale(1.05)}
+.project-preview::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:60px;
+  background:linear-gradient(transparent,var(--surface));
+}
+.project-body{padding:1.5rem 2rem 2rem;display:flex;flex-direction:column;flex:1}
 .project-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem}
 .project-badge{
   font-family:'JetBrains Mono',monospace;font-size:.6rem;
@@ -287,7 +301,7 @@ footer{
 @media(max-width:480px){
   .hero h1{font-size:2rem}
   .hero-desc{font-size:1rem}
-  .project-card{padding:1.5rem}
+  .project-card{} .project-body{padding:1.25rem 1.5rem 1.5rem}
 }
 </style>
 </head>
@@ -396,6 +410,8 @@ footer{
 
     <!-- BIRA -->
     <div class="project-card">
+      <div class="project-preview"><img src="bira-preview.png" alt="Bira"></div>
+      <div class="project-body">
       <div class="project-top">
         <span class="project-icon"><i data-lucide="bot"></i></span>
         <span class="project-badge badge-ai">IA + SaaS</span>
@@ -411,10 +427,12 @@ footer{
         <span>Node.js</span><span>TypeScript</span><span>React/Vite</span><span>Claude API</span>
         <span>Evolution API</span><span>Asaas</span><span>n8n</span><span>PostgreSQL</span><span>Resend</span>
       </div>
+      </div>
     </div>
 
     <!-- FLEETOS -->
     <div class="project-card">
+      <div class="project-body">
       <div class="project-top">
         <span class="project-icon"><i data-lucide="map-pin"></i></span>
         <span class="project-badge badge-saas">SaaS</span>
@@ -429,10 +447,12 @@ footer{
         <span>Node.js</span><span>React/Vite</span><span>PostgreSQL RLS</span><span>Traccar</span>
         <span>Asaas</span><span>n8n</span><span>Docker Swarm</span><span>Traefik</span>
       </div>
+      </div>
     </div>
 
     <!-- INTELBRAS -->
     <div class="project-card">
+      <div class="project-body">
       <div class="project-top">
         <span class="project-icon"><i data-lucide="camera"></i></span>
         <span class="project-badge badge-ai">IA + Visão</span>
@@ -446,10 +466,12 @@ footer{
       <div class="project-stack">
         <span>TypeScript</span><span>Claude Vision</span><span>Intelbras API</span><span>Node.js</span>
       </div>
+      </div>
     </div>
 
     <!-- OPENCLAW -->
     <div class="project-card">
+      <div class="project-body">
       <div class="project-top">
         <span class="project-icon"><i data-lucide="shield-check"></i></span>
         <span class="project-badge badge-ai">Agente IA</span>
@@ -463,10 +485,12 @@ footer{
       <div class="project-stack">
         <span>Shell</span><span>Node.js</span><span>Telegram Bot</span><span>Docker</span>
       </div>
+      </div>
     </div>
 
     <!-- DIAGNOSTICO IA -->
     <div class="project-card">
+      <div class="project-body">
       <div class="project-top">
         <span class="project-icon"><i data-lucide="scan-search"></i></span>
         <span class="project-badge badge-ai">IA</span>
@@ -480,10 +504,12 @@ footer{
       <div class="project-stack">
         <span>HTML/CSS</span><span>JavaScript</span><span>Claude API</span><span>n8n</span>
       </div>
+      </div>
     </div>
 
     <!-- FULLTRACK ASAAS -->
     <div class="project-card">
+      <div class="project-body">
       <div class="project-top">
         <span class="project-icon"><i data-lucide="refresh-cw"></i></span>
         <span class="project-badge badge-auto">Automação</span>
@@ -497,10 +523,12 @@ footer{
       <div class="project-stack">
         <span>n8n</span><span>Asaas API</span><span>Evolution API</span><span>Webhooks</span>
       </div>
+      </div>
     </div>
 
     <!-- VCA LEADS -->
     <div class="project-card">
+      <div class="project-body">
       <div class="project-top">
         <span class="project-icon"><i data-lucide="target"></i></span>
         <span class="project-badge badge-auto">Automação</span>
@@ -514,10 +542,13 @@ footer{
       <div class="project-stack">
         <span>JavaScript</span><span>n8n</span><span>Evolution API</span><span>WhatsApp</span>
       </div>
+      </div>
     </div>
 
     <!-- V-SYNC ODONTO -->
     <div class="project-card">
+      <div class="project-preview"><img src="vsync-preview.png" alt="V-Sync Odonto"></div>
+      <div class="project-body">
       <div class="project-top">
         <span class="project-icon"><i data-lucide="heart-pulse"></i></span>
         <span class="project-badge badge-saas">SaaS</span>
@@ -530,10 +561,13 @@ footer{
       <div class="project-stack">
         <span>TypeScript</span><span>React/Vite</span><span>Node.js</span><span>PostgreSQL</span>
       </div>
+      </div>
     </div>
 
     <!-- PARKFLOW -->
     <div class="project-card">
+      <div class="project-preview"><img src="parkflow-preview.png" alt="ParkFlow"></div>
+      <div class="project-body">
       <div class="project-top">
         <span class="project-icon"><i data-lucide="car"></i></span>
         <span class="project-badge badge-saas">SaaS</span>
@@ -547,10 +581,12 @@ footer{
       <div class="project-stack">
         <span>TypeScript</span><span>React/Vite</span><span>Node.js</span><span>PostgreSQL</span>
       </div>
+      </div>
     </div>
 
     <!-- PETLOVE -->
     <div class="project-card">
+      <div class="project-body">
       <div class="project-top">
         <span class="project-icon"><i data-lucide="paw-print"></i></span>
         <span class="project-badge badge-saas">SaaS</span>
@@ -564,27 +600,32 @@ footer{
       <div class="project-stack">
         <span>TypeScript</span><span>React/Vite</span><span>Node.js</span><span>PostgreSQL</span>
       </div>
+      </div>
     </div>
 
     <!-- LIGABRUTO -->
     <div class="project-card">
+      <div class="project-preview"><img src="ligabruto-preview.png" alt="LigaBruto BR"></div>
+      <div class="project-body">
       <div class="project-top">
         <span class="project-icon"><i data-lucide="trophy"></i></span>
         <span class="project-badge badge-saas">Plataforma</span>
       </div>
       <div class="project-name">LigaBruto BR</div>
       <div class="project-desc">
-        Plataforma de ligas esportivas com gestão de times, tabelas, 
-        resultados e classificações. Sistema completo para organização 
-        de campeonatos.
+        Plataforma completa para gestão da vida do caminhoneiro. 
+        Controle de frota, finanças pessoais, gestão de fretes, 
+        documentos digitais e comunidade integrada em um só lugar.
       </div>
       <div class="project-stack">
         <span>TypeScript</span><span>React/Vite</span><span>Node.js</span><span>PostgreSQL</span>
+      </div>
       </div>
     </div>
 
     <!-- AGENDAFLEX -->
     <div class="project-card">
+      <div class="project-body">
       <div class="project-top">
         <span class="project-icon"><i data-lucide="calendar-check"></i></span>
         <span class="project-badge badge-saas">SaaS</span>
@@ -598,22 +639,26 @@ footer{
       <div class="project-stack">
         <span>TypeScript</span><span>React/Vite</span><span>Node.js</span><span>PostgreSQL</span>
       </div>
+      </div>
     </div>
 
-    <!-- ESPETARIA -->
+    <!-- DIGUSTEU -->
     <div class="project-card">
+      <div class="project-preview"><img src="digusteu-preview.png" alt="DigustEU"></div>
+      <div class="project-body">
       <div class="project-top">
         <span class="project-icon"><i data-lucide="utensils-crossed"></i></span>
         <span class="project-badge badge-saas">Sistema</span>
       </div>
-      <div class="project-name">Espetaria</div>
+      <div class="project-name">DigustEU</div>
       <div class="project-desc">
-        Sistema para gestão de espetarias e food service. Controle de 
-        pedidos, cardápio digital, gestão de mesas e integração com 
-        cozinha e caixa.
+        Sistema completo para gestão de bares e restaurantes. Controle de 
+        pedidos, mesas, delivery, cardápio digital e integração com 
+        cozinha, caixa e financeiro.
       </div>
       <div class="project-stack">
         <span>JavaScript</span><span>Node.js</span><span>PostgreSQL</span>
+      </div>
       </div>
     </div>
 
